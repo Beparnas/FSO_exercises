@@ -30,11 +30,17 @@ const Content = (props)=>{
   console.log("content: "+props.sections)
   return(
     <>
-      {props.sections.map(course=>(
-        <p key={course[0]}>{course[0]} {course[1]}</p> // key added as best practice
+      {props.sections.map(section=>(
+        <Section section={section} key={section[0]}/>// key added as best practice
       ))
       }
     </>
+  )
+}
+const Section = (props)=>{
+  const section = props.section
+  return(
+    <p>{section[0]} {section[1]}</p> 
   )
 }
 

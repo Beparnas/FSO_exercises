@@ -1,3 +1,5 @@
+//exercise 1.4: done, I got ahead of myself!
+
 import { Component } from "react"
 
 const App = () => {

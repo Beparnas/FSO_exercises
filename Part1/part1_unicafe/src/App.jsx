@@ -6,6 +6,22 @@ const Header = (props) =>{
     <h1>{props.value}</h1>
   </>)
 }
+
+const StatsBlock = ({good,bad,neutral,count,avg,pctPos}) =>{
+  return (
+    <>
+      <Header value="Statistics"/>
+      <p>
+        good: {good} <br></br>
+        bad: {bad}<br></br>
+        neutral: {neutral}<br></br>
+        total: {count}<br></br>
+        average: {avg.toFixed(3)}<br></br>
+        pct positive: {(pctPos*100).toFixed(1)}%
+      </p>
+    </>
+  )
+}
 const App = () => {
   // save clicks of each button to its own state
   const [good, setGood] = useState(0)
@@ -48,15 +64,14 @@ const App = () => {
       <button onClick={handleGood()}>good</button>
       <button onClick={handleBad()}>bad</button>
       <button onClick={handleNeutral()}>neutral</button>
-      <Header value="Statistics"/>
-      <p>
-        good: {good} <br></br>
-        bad: {bad}<br></br>
-        neutral: {neutral}<br></br>
-        total: {count}<br></br>
-        average: {avg.toFixed(3)}<br></br>
-        pct positive: {(pctPos*100).toFixed(1)}%
-      </p>
+      
+      <StatsBlock good={good}
+                  bad={bad}
+                  neutral={neutral}
+                  count={count}
+                  avg={avg}
+                  pctPos={pctPos}>
+      </StatsBlock>
 
     </div>
   )

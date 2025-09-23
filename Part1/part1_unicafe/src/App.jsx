@@ -13,18 +13,33 @@ const App = () => {
   const [bad, setBad] = useState(0)
   //statistical data
   const [avg, updateAvg] = useState(0)
-
+  const [sum,updateSum] = useState(0)
+  const [count,updateCount] = useState(0)
+  const [pctPos,updatePctPos] = useState(0)
+  const calculateAvg = (newValue) =>{
+    updateSum(sum+newValue)
+    updateCount(count+1)
+    updateAvg ((sum+newValue)/(count+1))
+    let currentgood = good
+    if(newValue>0){
+      currentgood+=1
+    }
+    updatePctPos(currentgood/(count+1))
+  }
   //event handlers
   const handleGood = () => () => {
     setGood(good+1)
+    calculateAvg(1)
     console.log("good is now:",good+1)
   }
   const handleBad = () => () => {
     setBad(bad+1)
+    calculateAvg(-1)
     console.log("bad is now:", bad+1)
   }
   const handleNeutral = () => () => {
     setNeutral(neutral+1)
+    calculateAvg(0)
     console.log("neutral is now:",neutral+1)
   }
   return (
@@ -34,7 +49,14 @@ const App = () => {
       <button onClick={handleBad()}>bad</button>
       <button onClick={handleNeutral()}>neutral</button>
       <Header value="Statistics"/>
-      <p>good: {good} <br></br> bad: {bad}<br></br> neutral: {neutral}</p>
+      <p>
+        good: {good} <br></br>
+        bad: {bad}<br></br>
+        neutral: {neutral}<br></br>
+        total: {count}<br></br>
+        average: {avg.toFixed(3)}<br></br>
+        pct positive: {(pctPos*100).toFixed(1)}%
+      </p>
 
     </div>
   )

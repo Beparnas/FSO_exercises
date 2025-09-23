@@ -9,7 +9,7 @@ const Header = (props) =>{
 const StatsLine = ({statname,value}) =>{
   return (
     <>
-      <div>{statname}: {value}</div>
+      <tr><td>{statname}:</td><td>{value}</td></tr>
     </>
   )
 }
@@ -24,15 +24,16 @@ const StatsBlock = ({good,bad,neutral,count,avg,pctPos}) =>{
     return (
       <>
         {content}
-        <p>
-          <StatsLine statname="good" value={good}></StatsLine>
-          <StatsLine statname="bad" value={bad}></StatsLine>
-          <StatsLine statname="neutral" value={neutral}></StatsLine>
-          <StatsLine statname="total" value={count}></StatsLine>
-          <StatsLine statname="average" value={avg.toFixed(3)}></StatsLine>
-          <StatsLine statname="pct positive" value={`${(pctPos*100).toFixed(1)}%`} ></StatsLine>
-
-        </p>
+        <table>
+          <tbody>
+            <StatsLine statname="good" value={good} />
+            <StatsLine statname="bad" value={bad} />
+            <StatsLine statname="neutral" value={neutral} />
+            <StatsLine statname="total" value={count} />
+            <StatsLine statname="average" value={avg.toFixed(3)} />
+            <StatsLine statname="pct positive" value={`${(pctPos*100).toFixed(1)}%`} />
+          </tbody>
+        </table>
       </>
     )
   }

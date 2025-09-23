@@ -53,7 +53,7 @@ const Content = (props)=>{
 const Section = (props)=>{
   const section = props.section
   return(
-    <p>{section.name} {section.exercises}</p> 
+    <p><span style={{fontWeight: "bold"}}>section:</span> {section.name} <span style={{fontWeight: "bold"}}>num exercises:</span> {section.exercises}</p> 
   )
 }
 
@@ -63,7 +63,7 @@ const Totals = (props)=>{
     totalCount+=element.exercises
   })
   return(
-    <p>Number of exercises {totalCount}</p>
+    <p><span style={{fontWeight: "bold"}}>Total Number of exercises:</span> {totalCount}</p>
   )
 }
 export default App

@@ -6,6 +6,13 @@ const Header = (props) =>{
     <h1>{props.value}</h1>
   </>)
 }
+const StatsLine = ({statname,value}) =>{
+  return (
+    <>
+      <div>{statname}: {value}</div>
+    </>
+  )
+}
 
 const StatsBlock = ({good,bad,neutral,count,avg,pctPos}) =>{
   let content = (
@@ -18,12 +25,13 @@ const StatsBlock = ({good,bad,neutral,count,avg,pctPos}) =>{
       <>
         {content}
         <p>
-          good: {good} <br></br>
-          bad: {bad}<br></br>
-          neutral: {neutral}<br></br>
-          total: {count}<br></br>
-          average: {avg.toFixed(3)}<br></br>
-          pct positive: {(pctPos*100).toFixed(1)}%
+          <StatsLine statname="good" value={good}></StatsLine>
+          <StatsLine statname="bad" value={bad}></StatsLine>
+          <StatsLine statname="neutral" value={neutral}></StatsLine>
+          <StatsLine statname="total" value={count}></StatsLine>
+          <StatsLine statname="average" value={avg.toFixed(3)}></StatsLine>
+          <StatsLine statname="pct positive" value={`${(pctPos*100).toFixed(1)}%`} ></StatsLine>
+
         </p>
       </>
     )

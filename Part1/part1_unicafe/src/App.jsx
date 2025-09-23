@@ -8,19 +8,34 @@ const Header = (props) =>{
 }
 
 const StatsBlock = ({good,bad,neutral,count,avg,pctPos}) =>{
-  return (
+  let content = (
     <>
       <Header value="Statistics"/>
-      <p>
-        good: {good} <br></br>
-        bad: {bad}<br></br>
-        neutral: {neutral}<br></br>
-        total: {count}<br></br>
-        average: {avg.toFixed(3)}<br></br>
-        pct positive: {(pctPos*100).toFixed(1)}%
-      </p>
     </>
   )
+  if( count > 0){
+    return (
+      <>
+        {content}
+        <p>
+          good: {good} <br></br>
+          bad: {bad}<br></br>
+          neutral: {neutral}<br></br>
+          total: {count}<br></br>
+          average: {avg.toFixed(3)}<br></br>
+          pct positive: {(pctPos*100).toFixed(1)}%
+        </p>
+      </>
+    )
+  }
+  else{
+    return(
+      <>
+        {content}
+        <p>no feedback given</p>
+      </>
+    )
+  }
 }
 const App = () => {
   // save clicks of each button to its own state

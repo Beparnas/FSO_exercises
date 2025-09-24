@@ -1,4 +1,4 @@
-//exercise 1.6: 
+//exercise 1.6-1.11: 
 import { useState } from 'react'
 const Header = (props) =>{
   return (

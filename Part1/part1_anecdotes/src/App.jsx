@@ -1,6 +1,32 @@
 //exercise 1.12-1.14: 
 import { useState } from 'react'
-
+const Header = (props) =>{
+  return (
+  <>
+    <h1>{props.value}</h1>
+  </>)
+}
+const Quote = ({data})=>{
+  let plural = ""
+  if(data[1]!=1){
+    plural = "s"
+  }
+  return(
+    <>
+    <div style={{
+  fontStyle: "italic",
+  fontSize: 30,
+  borderLeft: "4px solid #333",
+  paddingLeft: "1em",
+  margin: "1em 0",
+  color: "#444"
+}}>
+  {data[0]}
+</div>
+    <div>this one has {data[1]} vote{plural}</div>
+    </>
+  )
+}
 const App = () => {
   const [anecdotes,updateVotes] = useState([
     ['If it hurts, do it more often.',0],
@@ -14,6 +40,7 @@ const App = () => {
   ])
    
   const [selected, setSelected] = useState(0)
+  const [winner, updateWinner] = useState(0)
   //basic random integer within 0-max function. source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
   function getRandomInt(max) {
     return Math.floor(Math.random() * max);
@@ -28,19 +55,26 @@ const App = () => {
     const newAnecdotes = [...anecdotes]
     newAnecdotes[idx][1]+=1
     updateVotes(newAnecdotes)
+    let mostVotes = 0
+    let winner =null
+    newAnecdotes.forEach(function(value,index){
+        if (value[1] > mostVotes){
+          mostVotes = value[1]
+          winner = index
+        }
+    })
+    updateWinner(winner)
   }
-  let plural = ""
-  if(anecdotes[selected][1]!=1){
-    plural = "s"
-  }
+  
   return (
     <>
-    <div>
-      {anecdotes[selected][0]}
-    </div>
-    <div>this one has {anecdotes[selected][1]} vote{plural}</div>
+    <Header value="Anecdote of the Day"></Header>
+    <Quote data={anecdotes[selected]}></Quote>
     <button onClick={nextAnecdote()}>next anecdote</button>
     <button onClick={vote(selected)}>vote</button>
+    <Header value= "Anecdote with the most votes"></Header>
+        <Quote data={anecdotes[winner]}></Quote>
+
     </>
   )
 }

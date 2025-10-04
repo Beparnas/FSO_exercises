@@ -39,7 +39,7 @@ const Course = ({course})=>{
     <div>
     <Header course={course}/>
     <Content sections={sections} />
-    {/* <Totals sections={sections}/> */}
+    <Totals sections={sections}/>
     </div>
   </>
   )
@@ -71,13 +71,13 @@ const Section = ({section})=>{
   )
 }
 
-const Totals = (props)=>{
+const Totals = ({sections})=>{
   let totalCount = 0
-  props.sections.forEach(element => {
-    totalCount+=element.exercises
-  })
+  let exerciseNums = sections.map(element => element.exercises)
+  totalCount = exerciseNums.reduce((accumulator, currentValue) => accumulator + currentValue,
+  0,)
   return(
-    <p><span style={{fontWeight: "bold"}}>Total Number of exercises:</span> {totalCount}</p>
+    <p><span style={{fontWeight: "bold"}}>Total Number of Exercises:</span> {totalCount}</p>
   )
 }
 export default App

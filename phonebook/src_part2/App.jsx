@@ -9,17 +9,20 @@ const PhonebookItem = ({person}) =>{
 const App = () => {
   const [persons, setPersons] = useState([
     { name: 'Arto Hellas',
-      number: '123-456-7890'
+      number: '123-456-7890',
+      id:1
      }
   ]) 
   const [newName, setNewName] = useState(['',''])
+  const [filterTerm,setFilterTerm] = useState('')
   
   const handleSubmit = (event)=>{
     event.preventDefault()
     console.log(`adding item ${newName}?`)
     const pbObject = {
       name: newName[0],
-      number: newName[1]
+      number: newName[1],
+      id:persons[persons.length-1].id+1
     }
     let names = persons.map(person=>person.name)
     if (names.includes(newName[0])){
@@ -40,6 +43,17 @@ const App = () => {
     else if(event.target.id == "number"){
       setNewName([newName[0],event.target.value])
     }
+    else if (event.target.id == "filter"){
+      setFilterTerm(event.target.value)
+    }
+  }
+  let personsShown = [];
+  if(filterTerm != ""){
+    console.log(`filtering for query ${filterTerm}`)
+    personsShown = persons.filter(person => person.name.toLowerCase().includes(filterTerm.toLowerCase())) 
+  }
+  else{
+    personsShown = persons
   }
   return (
     <div>
@@ -54,12 +68,15 @@ const App = () => {
         </div>
       </form>
       <h2>Numbers</h2>
-        <ul>
-          {persons.map(person => 
-                      <PhonebookItem  key={person.name} 
-                                      person={person}>                
-                      </PhonebookItem>)}
-        </ul>
+      <div>
+          <input id="filter" placeholder="filter by name..." value = {filterTerm} onChange={handleInputChange} />
+      </div>
+      <ul>
+        {personsShown.map(person => 
+                    <PhonebookItem  key={person.id} 
+                                    person={person}>                
+                    </PhonebookItem>)}
+      </ul>
     </div>
   )
 }

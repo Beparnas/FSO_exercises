@@ -14,11 +14,19 @@ const App = () => {
   
   const handleSubmit = (event)=>{
     event.preventDefault()
-    console.log("adding item ",newName)
+    console.log(`adding item ${newName}?`)
     const pbObject = {
       name: newName,
     }
-    setPersons(persons.concat(pbObject))
+    let names = persons.map(person=>person.name)
+    if (names.includes(newName)){
+      alert(`we already have an entry for ${newName}!`)
+      console.log(`duplicate entry, cancelling`)
+    }
+    else{
+      setPersons(persons.concat(pbObject))
+      console.log("done!")
+    }
     setNewName('')
   }
   const handleInputChange = (event)=>{
